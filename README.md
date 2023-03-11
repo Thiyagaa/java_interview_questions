@@ -18,13 +18,49 @@
 
 ### Q. What is a JVM, and how does it work?
 
-:::image type="content" source="images/jvm/1662305841379.png" alt-text="JVM Architecture":::
+![JVM Architecture](./images/jvm/1662305841379.png)
+
+Credits: [LinkedIn](https://www.linkedin.com/pulse/jvm-architecture-how-internally-work-ali-as-ad/)
 
 ### Q. What are the different components of the JVM?
 
-### Q. How does garbage collection work in the JVM, and what are the different types of garbage collectors?
+JVM is generally categorized based on the functionality into the below three components.
+>
+    ClassLoader
+    Runtime Data Area (Memory Area)
+    Execution Engine 
 
 ### Q. What is a class loader, and how does it work?
+
+A class loader is a component of the Java Virtual Machine (JVM) that loads Java classes into memory at runtime. The JVM uses a hierarchical class loader system to load classes from different sources, such as the local file system or remote servers.
+
+The class loader is responsible for three key tasks:
+
+**Loading**:
+The class loader is responsible for locating the bytecode of a class and reading it into memory. It searches for the bytecode in the classpath, which is a list of directories and JAR files where Java classes are stored. If the class has already been loaded, the class loader will simply return the existing class object.
+
+**Linking**: After a class has been loaded, it goes through a linking process that includes three stages: verification, preparation, and resolution. Verification checks that the bytecode is valid and does not violate the Java security model. Preparation allocates memory for static fields and initializes them to default values. Resolution replaces symbolic references with direct references to other classes or methods.
+
+**Initialization**: Finally, the class loader is responsible for initializing the class by executing its static initializer block, which is a block of code that initializes static fields or performs other initialization tasks.
+
+### Q. What are the different class loader?
+
+There are three types of class loaders in Java:
+
+**Bootstrap Class Loader**: It is responsible for loading core Java classes from the \lib\rt.jar file located in the JDK installation directory. It is the parent of all class loaders and is implemented in native code.
+
+**Extension Class Loader**: It is responsible for loading classes from the extensions directory (usually located at jre/lib/ext). It is a child of the Bootstrap Class Loader and is implemented in Java code.
+
+**Application Class Loader**: It is responsible for loading classes from the application classpath. It is a child of the Extension Class Loader and is implemented in Java code.
+
+When a class is requested, the class loader searches for it in its local cache. If the class is not found, it delegates the task to its parent class loader. This process continues until the class is found or the Bootstrap Class Loader is reached.
+
+If none of the class loaders can find the class, a ClassNotFoundException is thrown. Class loaders can also be used to load classes from other sources, such as network locations or databases, by creating custom class loaders.
+
+Class loaders in Java use a delegation model to load classes. Each class loader delegates the task of loading classes to its parent class loader. This ensures that classes are loaded in a hierarchical manner, with higher-level class loaders responsible for loading classes with greater visibility.
+
+
+### Q. How does garbage collection work in the JVM, and what are the different types of garbage collectors?
 
 ### Q. What is bytecode, and how is it executed in the JVM?
 
